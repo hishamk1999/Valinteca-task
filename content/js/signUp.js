@@ -15,7 +15,12 @@ const passwordRegex =
 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,}$/;
 
 // state it contains the status of userNameValidation, emailValid and passwordValid.
-const state = { usernameValid: false, emailValid: false, passwordValid: false };
+const state = {
+	usernameValid: false,
+	emailValid: false,
+	passwordValid: false,
+	password_confirm: false,
+};
 
 /**
  * @function
@@ -25,12 +30,29 @@ const state = { usernameValid: false, emailValid: false, passwordValid: false };
  */
 function submitForm(e) {
 	e.preventDefault();
-	if (!state.usernameValid && !state.emailValid && !state.passwordValid) {
+	if (
+		!state.usernameValid &&
+		!state.emailValid &&
+		!state.passwordValid &&
+		!state.password_confirm
+	) {
 		setError(userName, "Username must consist of 5 to 15 characters");
 		setError(email, "Email must be in a valid format");
 		setError(password, "Password must be at least 8 characters");
 		setError(confirmPassword, "Password should the same previous");
 		userName.focus();
+	} else if (!state.usernameValid) {
+		setError(userName, "Username must consist of 5 to 15 characters");
+		userName.focus();
+	} else if (!state.emailValid) {
+		setError(email, "Email must be in a valid format");
+		email.focus();
+	} else if (!state.passwordValid) {
+		setError(password, "Password must be at least 8 characters");
+		password.focus();
+	} else if (!state.password_confirm) {
+		setError(confirmPassword, "Password should the same previous");
+		confirmPassword.focus();
 	} else {
 		fetchForm({
 			username: userName.value,
@@ -141,11 +163,14 @@ let confirmPass = "";
 password.addEventListener("input", () => {
 	if (password.value === "") {
 		setError(password, "password cannot be empty");
+		state.passwordValid = false;
 	} else if (!passwordRegex.test(password.value)) {
 		setError(password, "Password must be at least 8 characters");
+		state.passwordValid = false;
 	} else {
 		setSuccess(password);
 		confirmPass = password.value;
+		state.passwordValid = true;
 	}
 });
 
@@ -155,13 +180,13 @@ password.addEventListener("input", () => {
 confirmPassword.addEventListener("input", () => {
 	if (confirmPassword.value === "") {
 		setError(confirmPassword, "password cannot be empty");
-		state.passwordValid = false;
+		state.password_confirm = false;
 	} else if (confirmPassword.value !== confirmPass) {
 		setError(confirmPassword, "Password should the same previous");
-		state.passwordValid = false;
+		state.password_confirm = false;
 	} else {
 		setSuccess(confirmPassword);
-		state.passwordValid = true;
+		state.password_confirm = true;
 	}
 });
 
