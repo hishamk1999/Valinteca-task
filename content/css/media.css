@@ -1,0 +1,43 @@
+/* Media Query */
+/*Small smartphones [325px -> 425px]*/
+@media only screen and (min-width: 325px) and (max-width: 425px) {
+	:root {
+		--fs-h1: 42px;
+		--fs-h2: 32px;
+		--fs-p: 16px;
+		--section-padding: 40px 30px;
+	}
+	/* Welcome card */
+	main .welcome-card {
+		flex-direction: column;
+		text-align: center;
+	}
+	/* SignUp card */
+	main .signUp-card {
+		flex-direction: column;
+		text-align: center;
+	}
+	/* Successfully card */
+	main .Successfully-card {
+		flex-direction: column;
+		text-align: center;
+	}
+}
+
+@media only screen and (min-width: 426px) and (max-width: 920px) {
+	/* Welcome card */
+	main .welcome-card {
+		flex-direction: column;
+		text-align: center;
+	}
+	/* SignUp card */
+	main .signUp-card {
+		flex-direction: column;
+		text-align: center;
+	}
+	/* Successfully card */
+	main .Successfully-card {
+		flex-direction: column;
+		text-align: center;
+	}
+}

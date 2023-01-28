@@ -1,0 +1,119 @@
+/**
+* Font Abdoullah Ashgar EL-kharef
+*/
+@font-face {
+	font-family: "Abdoullah Ashgar EL-kharef";
+	src: url("../assets/fonts/Abdoullah-Ashgar-EL-kharef/AbdoullahAshgarEL-kharef.eot");
+	src: url("../assets/fonts/Abdoullah-Ashgar-EL-kharef/AbdoullahAshgarEL-kharef.eot?#iefix")
+			format("embedded-opentype"),
+		url("../assets/fonts/Abdoullah-Ashgar-EL-kharef/AbdoullahAshgarEL-kharef.woff2")
+			format("woff2"),
+		url("../assets/fonts/Abdoullah-Ashgar-EL-kharef/AbdoullahAshgarEL-kharef.woff")
+			format("woff"),
+		url("../assets/fonts/Abdoullah-Ashgar-EL-kharef/AbdoullahAshgarEL-kharef.ttf")
+			format("truetype"),
+		url("../assets/fonts/Abdoullah-Ashgar-EL-kharef/AbdoullahAshgarEL-kharef.svg#AbdoullahAshgarEL-kharef")
+			format("svg");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+/* 
+ * Font Mulish
+ */
+@font-face {
+	font-family: "Mulish";
+	src: url("../assets/fonts/Mulish/Mulish-Regular.eot");
+	src: url("../assets/fonts/Mulish/Mulish-Regular.eot?#iefix")
+			format("embedded-opentype"),
+		url("../assets/fonts/Mulish/Mulish-Regular.woff2") format("woff2"),
+		url("../assets/fonts/Mulish/Mulish-Regular.woff") format("woff"),
+		url("../assets/fonts/Mulish/Mulish-Regular.ttf") format("truetype"),
+		url("../assets/fonts/Mulish/Mulish-Regular.svg#Mulish-Regular")
+			format("svg");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Declaration Of Main Variables*/
+:root {
+	--primary-color-darkGray: #3b3b3b;
+	--heading-color-gray: #2d2d2d;
+	--white-color: #ffff;
+	--light-purple: #1f1249;
+	--light-blue: #08174e;
+	--icon-color: #9cadf2;
+	--warning: rgb(255, 0, 0);
+	--font-family: "Mulish";
+	--section-padding: 60px;
+	--fs-h1: 56px;
+	--fs-h2: 42px;
+	--fs-p: 24px;
+	--daley: 0.3s;
+}
+
+/**
+ * Set up a decent box model on the root element
+ */
+html {
+	box-sizing: border-box;
+	height: 100%;
+}
+/**
+ * Make all elements from the DOM inherit from the parent box-sizing
+ * Since `*` has a specificity of 0, it does not override the `html` value
+ * making all elements inheriting from the root box-sizing value
+ */
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+	margin: 0;
+	padding: 0;
+}
+/**
+ * Set up a body element
+ */
+body {
+	position: relative;
+	min-height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: var(--font-family), sans-serif;
+	font-size: 16px;
+}
+body::after {
+	content: "";
+	background: url(../assets/images/background-img.png) no-repeat center center
+		fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-size: cover;
+	opacity: 60%;
+	inset: 0;
+	position: absolute;
+	z-index: -1;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Abdoullah Ashgar EL-kharef";
+	font-weight: 400;
+	color: var(--heading-color-gray);
+}
+h1 {
+	font-size: var(--fs-h1);
+}
+h2 {
+	font-size: var(--fs-h2);
+}
+img {
+	width: 100%;
+}

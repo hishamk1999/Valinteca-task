@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Abdoullah Ashgar EL-kharef';
+    src: url('AbdoullahAshgarEL-kharef.eot');
+    src: url('AbdoullahAshgarEL-kharef.eot?#iefix') format('embedded-opentype'),
+        url('AbdoullahAshgarEL-kharef.woff2') format('woff2'),
+        url('AbdoullahAshgarEL-kharef.woff') format('woff'),
+        url('AbdoullahAshgarEL-kharef.ttf') format('truetype'),
+        url('AbdoullahAshgarEL-kharef.svg#AbdoullahAshgarEL-kharef') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
