@@ -7,5 +7,5 @@ const mailLinkEle = document.querySelector(".mailLink");
 const email = localStorage.getItem("email");
 
 // Set the anchor element href and text content.
-mailLinkEle.setAttribute("href", email);
+mailLinkEle.setAttribute("href", `mailto:${email}`);
 mailLinkEle.textContent = email;

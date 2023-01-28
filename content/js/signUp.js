@@ -94,7 +94,7 @@ async function fetchForm(data) {
 	})
 		.then((res) => res.json())
 		.then((data) => {
-			localStorage.setItem("email", `mailto:${data.email}`);
+			localStorage.setItem("email", data.email);
 			window.location = "../pages/loggedIn.html";
 		})
 		.catch((error) => {
