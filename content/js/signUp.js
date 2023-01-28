@@ -11,8 +11,9 @@ const submitBtn = document.getElementById("createAcc");
 // Regular expressions for validation username, email and password.
 const userNameRegex = /^[a-zA-Z][a-zA-Z0-9]{3,13}[a-zA-Z]$/;
 const emailRegex = /^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$/;
-const passwordRegex =
-	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,}$/;
+// const passwordRegex =
+// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,}$/;
+const passwordRegex = /^[\S*]{8,}$/;
 
 // state it contains the status of userNameValidation, emailValid and passwordValid.
 const state = {
@@ -26,7 +27,6 @@ const state = {
  * @function
  * This function check if the all input is valid, if it valid invoked
  * fetchForm() function else throws an error below each input.
- *
  */
 function submitForm(e) {
 	e.preventDefault();
@@ -69,16 +69,15 @@ function submitForm(e) {
  * This function throws an error below the input.
  */
 function setError(element, massage) {
-	const parentElement = element.parentElement;
+	const parentElement = element.parentElement.parentElement;
+	const itemEle = parentElement.querySelector(".item");
 	const errorParent = parentElement.querySelector(".validation");
-	const errorElement = parentElement
-		.querySelector(".validation")
-		.querySelector("small");
+	const errorElement = errorParent.querySelector("small");
 
 	errorParent.style.display = "block";
 	errorElement.innerText = massage;
-	parentElement.classList.add("error");
-	parentElement.classList.remove("success");
+	itemEle.classList.add("error");
+	itemEle.classList.remove("success");
 }
 
 /**
@@ -86,16 +85,32 @@ function setError(element, massage) {
  * This function removes the error element and adds a success class.
  */
 function setSuccess(element) {
-	const parentElement = element.parentElement;
+	const parentElement = element.parentElement.parentElement;
+	const itemEle = parentElement.querySelector(".item");
 	const errorParent = parentElement.querySelector(".validation");
-	const errorElement = parentElement
-		.querySelector(".validation")
-		.querySelector("small");
+	const errorElement = parentElement.querySelector("small");
 
 	errorParent.style.display = "none";
 	errorElement.innerText = "";
-	parentElement.classList.add("success");
-	parentElement.classList.remove("error");
+	itemEle.classList.add("success");
+	itemEle.classList.remove("error");
+}
+
+/**
+ * @param {object} error 
+ * This function handles errors coming from the API 
+ * generated when one of the values of an input is incorrect, 
+ * and then invoke setError() function exactly on the wrong one.
+ */
+function apiErrorHandler(error) {
+	if (error.password) {
+		setError(password, error.password[0]);
+		setError(confirmPassword, error.password[0]);
+	} else if (error.username) {
+		setError(userName, error.username[0]);
+	} else if (error.email) {
+		setError(email, error.email[0]);
+	}
 }
 
 /**
@@ -116,11 +131,15 @@ async function fetchForm(data) {
 	})
 		.then((res) => res.json())
 		.then((data) => {
-			localStorage.setItem("email", data.email);
-			window.location = "../pages/loggedIn.html";
+			if (data.errors) {
+				apiErrorHandler(data.errors);
+			} else {
+				localStorage.setItem("email", data.email);
+				window.location = "../pages/loggedIn.html";
+			}
 		})
 		.catch((error) => {
-			throw new Error(error.massage);
+			console.log(error);
 		});
 }
 
